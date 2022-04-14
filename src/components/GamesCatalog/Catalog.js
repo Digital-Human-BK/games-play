@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
+import { getAll } from '../../services/gamesService';
+
 import LoadingPage from '../LoadingPage';
 import NotFound from '../NotFound';
 import GameCard from './GameCard';
 
-const Catalog = () => {
+const Catalog = ({ onNavigate }) => {
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,13 +13,7 @@ const Catalog = () => {
   const fetchGames = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(
-        'http://localhost:3030/data/games?sortBy=_createdOn%20desc'
-      );
-      if (res.ok === false) {
-        throw new Error('Someting went wrong!');
-      }
-      const gamesData = await res.json();
+      const gamesData = await getAll();
 
       setGames(gamesData);
       setIsLoading(false);
@@ -34,7 +30,9 @@ const Catalog = () => {
   let content = <h3 className='no-articles'>No articles yet</h3>;
 
   if (games.length > 0) {
-    content = games.map((data) => <GameCard key={data._id} game={data} />);
+    content = games.map((data) => (
+      <GameCard onNavigate={onNavigate} key={data._id} game={data} />
+    ));
   }
 
   if (error) {

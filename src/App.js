@@ -7,29 +7,37 @@ import Create from './components/Create';
 import Login from './components/Login';
 import Register from './components/Register';
 import NotFound from './components/NotFound';
+import Details from './components/Details';
 
 function App() {
   const [page, setPage] = useState('/');
-
-  const routes = {
-    '/': <WelcomeWorld />,
-    '/home': <WelcomeWorld />,
-    '/catalog': <Catalog />,
-    '/create': <Create />,
-    '/login': <Login />,
-    '/register': <Register />,
-  };
 
   const navigationHandler = (path) => {
     console.log(path);
     setPage(path);
   };
 
+  const router = (path) => {
+    const [_, rootPath, param] = path.split('/');
+
+    const routes = {
+      '/': <WelcomeWorld />,
+      '/home': <WelcomeWorld />,
+      '/catalog': <Catalog onNavigate={navigationHandler} />,
+      '/create': <Create />,
+      '/login': <Login />,
+      '/register': <Register />,
+      '/details': <Details id={param}/>,
+    };
+
+    return routes[`/${rootPath}`];
+  };
+
   return (
     <div id='box'>
       <Header onNavigate={navigationHandler} />
       <main id='main-content'>
-        {routes[page] || <NotFound>Something went wrong!</NotFound>}
+        {router(page) || <NotFound>Something went wrong!</NotFound>}
       </main>
     </div>
   );
