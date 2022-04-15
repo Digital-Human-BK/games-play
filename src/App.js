@@ -21,8 +21,8 @@ function App() {
     const [_, rootPath, param] = path.split('/');
 
     const routes = {
-      '/': <WelcomeWorld />,
-      '/home': <WelcomeWorld />,
+      '/': <WelcomeWorld onNavigate={navigationHandler} />,
+      '/home': <WelcomeWorld onNavigate={navigationHandler}/>,
       '/catalog': <Catalog onNavigate={navigationHandler} />,
       '/create': <Create />,
       '/login': <Login />,

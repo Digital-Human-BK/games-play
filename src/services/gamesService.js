@@ -16,3 +16,14 @@ export async function getById(id) {
   }
   return res.json();
 }
+
+export async function getLatest() {
+  const res = await fetch(
+    baseUrl + `?sortBy=_createdOn%20desc&distinct=category`
+  );
+
+  if (res.ok === false) {
+    throw new Error('Someting went wrong!');
+  }
+  return res.json();
+}
