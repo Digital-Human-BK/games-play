@@ -4,7 +4,7 @@ import LatestGamesCard from './GamesCatalog/LatestGamesCard';
 import LoadingPage from './LoadingPage';
 import NotFound from './NotFound';
 
-const WelcomeWorld = ({ onNavigate }) => {
+const WelcomeWorld = () => {
   const [latestGames, setLatestGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -29,7 +29,7 @@ const WelcomeWorld = ({ onNavigate }) => {
 
   if (latestGames.length > 0) {
     content = latestGames.map((g) => {
-      return <LatestGamesCard key={g._id} onNavigate={onNavigate} game={g} />;
+      return <LatestGamesCard key={g._id} game={g} />;
     });
   }
 

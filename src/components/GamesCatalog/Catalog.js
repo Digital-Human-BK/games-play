@@ -5,7 +5,7 @@ import LoadingPage from '../LoadingPage';
 import NotFound from '../NotFound';
 import GameCard from './GameCard';
 
-const Catalog = ({ onNavigate }) => {
+const Catalog = () => {
   const [games, setGames] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -31,7 +31,7 @@ const Catalog = ({ onNavigate }) => {
 
   if (games.length > 0) {
     content = games.map((data) => (
-      <GameCard onNavigate={onNavigate} key={data._id} game={data} />
+      <GameCard key={data._id} game={data} />
     ));
   }
 

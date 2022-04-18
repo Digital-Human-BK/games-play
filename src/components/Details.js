@@ -2,16 +2,16 @@ import { useEffect, useState, useCallback } from 'react';
 import { getById } from '../services/gamesService';
 import LoadingPage from './LoadingPage';
 
-const Details = ({ id }) => {
+const Details = ({ match }) => {
   const [game, setGame] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   const getGameData = useCallback(async () => {
     setIsLoading(true);
-    const gameData = await getById(id);
+    const gameData = await getById(match.params.gameId);
     setGame(gameData);
     setIsLoading(false);
-  },[id]);
+  }, []);
 
   useEffect(() => {
     getGameData();
@@ -22,7 +22,7 @@ const Details = ({ id }) => {
       <h1>Game Details</h1>
       <div className='info-section'>
         <div className='game-header'>
-          <img className='game-img' src={game.imageUrl} alt='Game'/>
+          <img className='game-img' src={game.imageUrl} alt='Game' />
           <h1>{game.title}</h1>
           <span className='levels'>MaxLevel: {game.maxLevel}</span>
           <p className='type'>{game.category}</p>

@@ -1,10 +1,6 @@
-const LatestGamesCard = ({ game, onNavigate }) => {
-  const clickHandler = (ev) => {
-    ev.preventDefault();
+import { Link } from 'react-router-dom';
 
-    onNavigate(`/details/${game._id}`);
-  };
-
+const LatestGamesCard = ({ game }) => {
   return (
     <div className='game'>
       <div className='image-wrap'>
@@ -19,13 +15,12 @@ const LatestGamesCard = ({ game, onNavigate }) => {
         <span>☆</span>
       </div>
       <div className='data-buttons'>
-        <a
-          href={`/details/${game._id}`}
-          onClick={clickHandler}
+        <Link
+          to={`/catalog/${game._id}`}
           className='btn details-btn'
         >
           Details
-        </a>
+        </Link>
       </div>
     </div>
   );

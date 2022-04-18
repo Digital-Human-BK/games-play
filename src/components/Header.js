@@ -1,33 +1,26 @@
-const Header = ({ 
-  onNavigate,
-}) => {
+import { NavLink } from 'react-router-dom';
+import './Header.css'
 
-  const onHeaderClick = (ev) => {
-    ev.preventDefault();
-
-    if (ev.target.tagName === 'A') {
-      let url = new URL(ev.target.href);
-
-      onNavigate(url.pathname);
-    }
+const Header = () => {
+  const navStyles = {
+    textDecoration: 'underline',
   };
-
   return (
-    <header onClick={onHeaderClick}>
+    <header>
       <h1>
-        <a className='home' href='/'>
+        <NavLink className='home' to='/'>
           GamesPlay
-        </a>
+        </NavLink>
       </h1>
       <nav>
-        <a href='/catalog'>All games</a>
+        <NavLink activeStyle={navStyles} to='/catalog'>All games</NavLink>
         <div id='user'>
-          <a href='/create'>Create Game</a>
-          <a href='/logout'>Logout</a>
+          <NavLink activeStyle={navStyles} to='/create'>Create Game</NavLink>
+          <NavLink activeStyle={navStyles} to='/logout'>Logout</NavLink>
         </div>
         <div id='guest'>
-          <a href='/login'>Login</a>
-          <a href='/register'>Register</a>
+          <NavLink activeClassName='active-header-link' to='/login'>Login</NavLink>
+          <NavLink activeStyle={{textDecoration: 'underline'}} to='/register'>Register</NavLink>
         </div>
       </nav>
     </header>
