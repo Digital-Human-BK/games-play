@@ -33,6 +33,7 @@ function App() {
               return <Redirect to='/' />;
             }}
           />
+          <Route path='*' component={NotFound}/>
         </Switch>
       </main>
     </div>
